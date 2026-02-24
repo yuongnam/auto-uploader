@@ -1,0 +1,25 @@
+name: Auto Uploader
+on:
+  schedule:
+    - cron: '0 * * * *'   # 每小时自动运行
+  workflow_dispatch:     # 支持手动触发
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install -r cloud/requirements.txt
+      - name: Run main
+        env:
+          OSS_ENDPOINT: ${{ secrets.OSS_ENDPOINT }}
+          OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
+          OSS_AK: ${{ secrets.OSS_AK }}
+          OSS_SK: ${{ secrets.OSS_SK }}
+          OSS_REGION: ${{ secrets.OSS_REGION }}
+        run: python cloud/main.py
