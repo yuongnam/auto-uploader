@@ -1,0 +1,5 @@
+{
+  "version": "1.0",
+  "description": "自动搬运发布队列 - 手机端 Auto.js 从此文件读取待发布任务",
+  "queue": []
+}

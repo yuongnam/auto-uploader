@@ -1,0 +1,13 @@
+# Vercel Serverless Function configuration
+{
+  "functions": {
+    "cloud/main.py": {
+      "runtime": "python@3.9",
+      "maxDuration": 300,
+      "memory": 1024
+    }
+  },
+  "crons": [
+    "0 * * * *"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "cloud": {
+    "provider": "vercel",            // vercel | aliyun_fc | tencent_scf
+    "schedule": "0 * * * *",         // 每小时运行（cron）
+    "timezone": "Asia/Shanghai"
+  },
+  "source": {
+    "platforms": ["youtube", "tiktok"],
+    "query": "funny comedy vines humor 搞笑",
+    "max_results": 20,
+    "min_duration": 15,
+    "max_duration": 300,
+    "min_views": 50000,
+    "download_dir": "/tmp/downloads"
+  },
+  "deduplication": {
+    "mode": "standard",             // light | standard | heavy
+    "steps": [
+      "crop",                       // 四周裁剪 2%
+      "mirror",                     // 水平镜像
+      "filter",                     // 亮度+5, 对比度+10, 饱和度-5, 锐化+20
+      "speed",                      // 随机变速 0.9x-1.3x
+      "bgm",                        // 替换热门BGM（文件在 /assets/bgm/）
+      "subtitle",                   // 添加底部大字幕
+      "overlay"                     // 画中画（半透明Logo）
+    ],
+    "output_resolution": "1080p",
+    "output_fps": 30,
+    "output_bitrate": 8000
+  },
+  "storage": {
+    "provider": "aliyun_oss",       // aliyun_oss | tencent_cos | github
+    "endpoint": "https://oss-cn-hangzhou.aliyuncs.com",
+    "bucket": "your-bucket-name",
+    "region": "cn-hangzhou",
+    "access_key_id": "YOUR_ACCESS_KEY_ID",
+    "access_key_secret": "YOUR_ACCESS_KEY_SECRET",
+    "path_prefix": "videos/funny"
+  },
+  "publish": {
+    "kuaishou": {
+      "enabled": true,
+      "count_per_day": 2,
+      "schedule_hours": [12, 19, 20],
+      "default_titles": [
+        "笑死我了！这谁顶得住！😆",
+        "太有才了！哈哈哈哈😂",
+        "每天一条搞笑视频，烦恼全忘掉！"
+      ],
+      "default_topics": ["#搞笑", "#幽默", "#日常"]
+    },
+    "douyin": {
+      "enabled": true,
+      "count_per_day": 1,
+      "schedule_hours": [18, 21],
+      "default_titles": [
+        "哈哈这也太逗了！🤣",
+        "快乐每一天，搞笑不间断～"
+      ],
+      "default_topics": ["#搞笑", "#幽默"]
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "retention_days": 7
+  }
+}
